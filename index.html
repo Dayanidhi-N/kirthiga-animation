@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll Animation</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="intro">
+      <button id="startBtn">Enter Experience</button>
+    </div>
+
+    <h2 class="title">KIRTHIGA</h2>
+    <section>
+      <h2 class="inner-title">KIRTHIGA</h2>
+    </section>
+    <audio id="bg-audio" src="dayabgm.mp3" preload="auto" loop></audio>
+    <script>
+      // let section = document.querySelector("section");
+      // window.addEventListener("scroll", function () {
+      //   console.log("scroll");
+      //   let value = window.scrollY;
+      //   section.style.clipPath = `circle(${value}px at left center)`;
+      // });
+      const section = document.querySelector("section");
+
+      let radius = 0;
+      const maxRadius = 1600;
+      const speed = 2; // smaller = slower & smoother
+      const audio = document.getElementById("bg-audio");
+       const startBtn = document.getElementById("startBtn");
+
+      function animate() {
+        radius += speed;
+
+        section.style.clipPath = `circle(${radius}px at left center)`;
+
+        if (radius < maxRadius) {
+          requestAnimationFrame(animate);
+        }
+      }
+
+ startBtn.addEventListener("click", () => {
+    // Play audio (now allowed ✅)
+    audio.play();
+
+    // Start animation
+    animate();
+
+    // Remove intro overlay
+    intro.style.opacity = "0";
+    intro.style.pointerEvents = "none";
+
+    setTimeout(() => {
+      intro.remove();
+    }, 600);
+  });
+
+    </script>
+  </body>
+</html>
